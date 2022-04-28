@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  mysqlAtlasware:
+    image: mysql:5.7
+    container_name: mysqlAtlasware
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: fenix-atlasware
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
