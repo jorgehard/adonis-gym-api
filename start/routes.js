@@ -13,6 +13,20 @@ Route.get("/", () => {
 // Route.put("/users/:id", 'UserController.update');
 // Route.delete("/users/:id", 'UserController.destroy');
 
+// Login JWT
+Route.post("/sessions", "SessionController.create");
+Route.put("/sessions", "SessionController.refreshToken");
+
+//Permissions and Roles
+Route.resource("permissions", "PermissionController")
+  .apiOnly()
+  .middleware(["auth:jwt", "is:manager"]);
+
+Route.resource("roles", "RoleController")
+  .apiOnly()
+  .middleware(["auth:jwt", "is:manager"]);
+
+// Users
 Route.resource("users", "UserController")
   .apiOnly()
   .validator(
@@ -22,24 +36,3 @@ Route.resource("users", "UserController")
     ])
   )
   .middleware(["auth:jwt", "is:manager"]);
-
-Route.resource("clients", "ClientController").apiOnly().middleware("auth:jwt");
-
-Route.resource("exercises", "ExerciseController")
-  .apiOnly()
-  .middleware(["auth:jwt", "can:gerenc_exercises"]);
-
-Route.resource("trainings", "TrainingController")
-  .apiOnly()
-  .middleware("auth:jwt");
-
-Route.resource("permissions", "PermissionController")
-  .apiOnly()
-  .middleware(["auth:jwt", "is:manager"]);
-
-Route.resource("roles", "RoleController")
-  .apiOnly()
-  .middleware(["auth:jwt", "is:manager"]);
-
-Route.post("/sessions", "SessionController.create");
-Route.put("/sessions", "SessionController.refreshToken");

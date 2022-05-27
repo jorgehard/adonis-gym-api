@@ -19,9 +19,7 @@ class User extends Model {
       '@provider:Adonis/Acl/HasPermission'
     ]
   }
-  client() {
-    return this.hasOne("App/Models/Client");
-  }
+
   typeUser() {
     return this.belongsTo("App/Models/TypeUser");
   }

@@ -18,6 +18,7 @@ class UserController {
       "username",
       "email",
       "password",
+      "codigo",
       "type_user_id",
       "permissions",
       "roles",
@@ -40,6 +41,7 @@ class UserController {
       "username",
       "email",
       "password",
+      "codigo",
       "type_user_id",
       "permissions",
       "roles",
@@ -50,7 +52,7 @@ class UserController {
       await user.permissions().sync(permissions);
     }
     if (roles) {
-      await user.roles().attach(permissions);
+      await user.roles().attach(roles);
     }
     await user.loadMany(["roles", "permissions"]);
     return user;
